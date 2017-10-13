@@ -50,13 +50,6 @@ inline double exp_n2(double x1, double x2)
         return 0.;
 }
 
-double swit2_(double wvnmb)
-{
-    return pow( (5.55243*(exp_n(-0.3*wvnmb/15.762) - exp_n(-0.6*wvnmb/15.762)))*wvnmb, 0.5) 
-	  / 1034.66 * pow(sin(wvnmb/65.), 2.);
-}
-
-
 double GaussianQuad_N2(const double x1)
 {
     double x[6], w[6];
@@ -84,7 +77,12 @@ double GaussianQuad_N2(const double x1)
     w[3]=2.0*xm/3.515625;
 
     double s=0.0;
-    for(int j=1; j<=5; j++) s += w[j]*swit2_(x[j]);
+    double lll;
+    for(int j=1; j<=5; j++) {
+        lll = sin(x[j]/65.);
+        lll = 1034.66*lll*lll;
+        s += w[j] * (sqrt((5.55243 * (exp_n(-0.3*x[j]/15.762) - exp_n(-0.6*x[j]/15.762))) * x[j])/k);
+    }
 
     return s;
 }
