@@ -79,8 +79,7 @@ double GaussianQuad_N2(const double x1)
     double lll;
     for(int j=1; j<=5; j++) {
         lll = sin(x[j]/65.);
-        lll = 1034.66*lll*lll;
-        s += w[j] * (sqrt((5.55243 * (exp_n(-0.3*x[j]/15.762) - exp_n(-0.6*x[j]/15.762))) * x[j])/lll);
+        s += w[j] * (sqrt((5.55243 * (exp_n(-0.3*x[j]/15.762) - exp_n(-0.6*x[j]/15.762))) * x[j])/1034.66*(lll*lll));
     }
 
     return s;
